@@ -1,4 +1,5 @@
 import inquirer from 'inquirer';
+import fs from 'fs';
 
 const object = [
   {
@@ -27,11 +28,15 @@ function createHTML(data) {
   const fileName = data.fileName;
   const title = data.titleName;
   let content;
+
   if(data.useRoot === true) {
-    content = `<div id='root'><p>${data.content}</p></div>`
+    content = `<div id='root'>
+        <p>${data.content}</p>
+      </div>`
   } else {
     content = `<p>${data.content}</p>`
   }
+
   const bodyData = `
     <!DOCTYPE html>
     <html lang="ko">
@@ -42,12 +47,18 @@ function createHTML(data) {
       <title>${title}</title>
     </head>
     <body>
-  
+      ${content}
     </body>
     </html>
   `;
+
+  fs.writeFile(`./result/${fileName}.html`, bodyData, (err) => {
+    if (err) throw err;
+    console.log('파일이 생성되었습니다')
+  })
+
 }
 
 inquirer.prompt(object).then(answer => {
-  console.log(answer);
+  createHTML(answer);
 })
