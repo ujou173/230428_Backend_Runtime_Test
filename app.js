@@ -1,11 +1,18 @@
 import inquirer from 'inquirer';
 
-const fileName = {
+const object = [
+  {
   type: 'input',
-  name: 'name',
+  name: 'filename',
   message: '작성 될 HTML 파일의 이름을 입력하세요',
-}
+  },
+  {
+    type: 'confirm',
+    name: 'useRoot',
+    message: '#root div를 만드시겠습니까?',
+  }
+]
 
-inquirer.prompt(fileName).then(answer => {
+inquirer.prompt(object).then(answer => {
   console.log(answer);
 })
