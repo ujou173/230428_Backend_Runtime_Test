@@ -3,7 +3,7 @@ import inquirer from 'inquirer';
 const object = [
   {
   type: 'input',
-  name: 'filename',
+  name: 'fileName',
   message: '작성 될 HTML 파일의 이름을 입력하세요',
   },
   {
@@ -21,7 +21,32 @@ const object = [
     name: 'content',
     message: '본문 내용을 입력하세요'
   }
-]
+];
+
+function createHTML(data) {
+  const fileName = data.fileName;
+  const title = data.titleName;
+  let content;
+  if(data.useRoot === true) {
+    content = `<div id='root'><p>${data.content}</p></div>`
+  } else {
+    content = `<p>${data.content}</p>`
+  }
+  const bodyData = `
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>${title}</title>
+    </head>
+    <body>
+  
+    </body>
+    </html>
+  `;
+}
 
 inquirer.prompt(object).then(answer => {
   console.log(answer);
