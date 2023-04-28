@@ -1,11 +1,12 @@
 import inquirer from 'inquirer';
+const { Command } = require('commander');
 
-const fileName = {
-  type: 'input',
-  name: 'name',
-  message: '작성 될 HTML 파일의 이름을 입력하세요',
-}
+const commander  = new Command();
 
-inquirer.prompt(fileName).then(answer => {
-  console.log(answer);
-})
+commander
+  .version('V 0.0.1')
+  .description('CLI Interface')
+  .option('-f, --filename <filename>', 'set filename')
+  .option('-f, --filename <filename>', 'set filename')
+
+  commander.Command('split')
